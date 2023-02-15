@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  workspace:
+    build:
+      args:
+        GID: ${GID:-0}
+        UID: ${UID:-0}
+      context: .
+    command: 
+      - zsh
+      - --login
+      - -c
+      - |
+        sleep-infinity
+    image: node:18
+    init: true
+    user: ${UID:-0}:${GID:-0}
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
