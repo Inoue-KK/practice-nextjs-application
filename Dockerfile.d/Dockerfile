@@ -10,4 +10,6 @@ RUN :\
     curl\
     sudo\
     zsh\
+    git\
+    nodejs\
     && :

@@ -1,6 +1,27 @@
 version: '3.9'
 
 services:
+  frontend:
+    build:
+      args:
+        GID: ${GID:-0}
+        UID: ${UID:-0}
+      context: .
+      dockerfile: Dockerfile.d/Dockerfile
+    command: 
+      - zsh
+      - --login
+      - -c
+      - |
+        npm check run updates --upgrade
+        npm install
+        npm audit fix
+    init: true
+    user: ${UID:-0}:${GID:-0}
+    volumes:
+      - .:/workspace
+    working_dir: /workspace/frontend
+
   workspace:
     build:
       args:
